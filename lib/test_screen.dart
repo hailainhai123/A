@@ -38,7 +38,8 @@ class _TestScreenState extends State<TestScreen> {
   int power = 0;
   String power2;
 
-  List<String> listMode = ['0', '1', '2', '3'];
+  // List<String> listMode = ['0', '1', '2', '3'];
+  List<String> listMode = ['1', '3', '4'];
   List<String> listFan = ['0', '2', '3', '4'];
   List<String> listEco = ['Eco', 'Nor', 'High'];
   List<String> listAir = ['0', '1', '2','3','4','5'];
@@ -77,10 +78,13 @@ class _TestScreenState extends State<TestScreen> {
                 Expanded(
                   child: Column(
                     children: [
-                      buildModeButton(Icons.autorenew, 0),
-                      buildModeButton(Icons.ac_unit, 1),
-                      buildModeButton(Icons.wb_sunny_outlined, 2),
-                      buildModeButton(Icons.waves_outlined, 3),
+                      // buildModeButton(Icons.autorenew, 0),
+                      buildModeButton(Icons.ac_unit, 0),
+                      buildModeButton(Icons.wb_sunny_outlined, 1),
+                      // buildModeButton(Icons.ac_unit, 1),
+                      // buildModeButton(Icons.wb_sunny_outlined, 2),
+                      // buildModeButton(Icons.waves_outlined, 3),
+                      buildModeButton(Icons.waves_outlined, 2),
                     ],
                   ),
                 ),
@@ -268,10 +272,10 @@ class _TestScreenState extends State<TestScreen> {
                         listPower[power],
                         listFan[fan],
                         listMode[mode],
+                        listEco[eco],
                         listAir[air],
                         '${nhietDo}',
                         Constants.mac,
-                        listEco[eco],
                       );
                       pubTopic = 'TECHNO1';
                       publishMessage(pubTopic, jsonEncode(airconditional));
@@ -289,7 +293,7 @@ class _TestScreenState extends State<TestScreen> {
       onPressed: () {
         if (power == 1) {
           mode++;
-          if (mode > 3) mode = 0;
+          if (mode > 2) mode = 0;
           Airconditional airconditional = Airconditional(
             '',
             'set',
@@ -297,10 +301,10 @@ class _TestScreenState extends State<TestScreen> {
             listPower[power],
             listFan[fan],
             listMode[mode],
-            listAir[air],
             '${nhietDo}',
-            Constants.mac,
             listEco[eco],
+            listAir[air],
+            Constants.mac,
           );
           pubTopic = 'TECHNO1';
           publishMessage(pubTopic, jsonEncode(airconditional));
@@ -340,10 +344,10 @@ class _TestScreenState extends State<TestScreen> {
             listPower[power],
             listFan[fan],
             listMode[mode],
-            listAir[air],
             '${nhietDo}',
-            Constants.mac,
             listEco[eco],
+            listAir[air],
+            Constants.mac,
           );
           pubTopic = 'TECHNO1';
           publishMessage(pubTopic, jsonEncode(airconditional));
@@ -383,10 +387,10 @@ class _TestScreenState extends State<TestScreen> {
             listPower[power],
             listFan[fan],
             listMode[mode],
-            listAir[air],
             '${nhietDo}',
-            Constants.mac,
             listEco[eco],
+            listAir[air],
+            Constants.mac,
           );
           pubTopic = 'TECHNO1';
           publishMessage(pubTopic, jsonEncode(airconditional));
@@ -426,10 +430,10 @@ class _TestScreenState extends State<TestScreen> {
             listPower[power],
             listFan[fan],
             listMode[mode],
-            listAir[air],
             '${nhietDo}',
-            Constants.mac,
             listEco[eco],
+            listAir[air],
+            Constants.mac,
           );
           pubTopic = 'TECHNO1';
           publishMessage(pubTopic, jsonEncode(airconditional));
@@ -491,7 +495,7 @@ class _TestScreenState extends State<TestScreen> {
               print('_TestScreenState.dropdownDepartment mahang $mahang');
               getModel();
             });
-            print('_TestScreenState.dropdownDepartment currentSelectedValue $currentSelectedValue');
+            print('_TestScreenState.dropdownDepartment dropDownItemsModel $dropDownItemsModel');
           },
           items: dropDownItems.map((String value) {
             return DropdownMenuItem<String>(
@@ -604,10 +608,10 @@ class _TestScreenState extends State<TestScreen> {
       listPower[power],
       listFan[fan],
       listMode[mode],
-      listAir[air],
       '${nhietDo}',
-      Constants.mac,
       listEco[eco],
+      listAir[air],
+      Constants.mac,
     );
     pubTopic = 'TECHNO1';
     publishMessage(pubTopic, jsonEncode(airconditional));
@@ -622,14 +626,14 @@ class _TestScreenState extends State<TestScreen> {
   void getModel() async {
 
     Airconditional a =
-        Airconditional(mahang,'', '', '', '', '', '', '', Constants.mac, '');
+        Airconditional(mahang,'', '', '', '', '', '', '', '', Constants.mac,);
     pubTopic = Constants.GET_MODEL;
     publishMessage(pubTopic, jsonEncode(a));
   }
 
   void getHang() async {
     Airconditional a =
-        Airconditional('', '', '', '', '', '', '', '', Constants.mac, '');
+        Airconditional('', '', '', '', '', '', '', '', '', Constants.mac,);
     pubTopic = Constants.GET_HANG;
     publishMessage(pubTopic, jsonEncode(a));
   }
@@ -694,10 +698,10 @@ class _TestScreenState extends State<TestScreen> {
           listPower[power],
           listFan[fan],
           listMode[mode],
-          listAir[air],
           '${nhietDo}',
-          Constants.mac,
           listEco[eco],
+          listAir[air],
+          Constants.mac,
         );
         pubTopic = 'TECHNO1';
         publishMessage(pubTopic, jsonEncode(airconditional));

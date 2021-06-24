@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Airconditional',
       home: SafeArea(
-        child: SplashScreen(),
+        // child: SplashScreen(),
         // child: HomeScreen(),
-        // child: TestScreen(),
+        child: TestScreen(),
       ),
     );
   }

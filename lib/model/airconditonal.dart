@@ -8,14 +8,14 @@ class Airconditional {
   String fan;
   String mode;
   String eco;
-  String airflow;
-  String nhietdo;
+  String ai;
+  String nd;
   String mac;
   Color color;
   List<dynamic> id;
 
   Airconditional(this.mahang, this.cmd, this.idprotocol, this.power, this.fan, this.mode,
-      this.airflow, this.nhietdo, this.mac, this.eco);
+      this.nd, this.eco, this.ai, this.mac);
 
   Airconditional.fromJson(Map<String, dynamic> json)
       : mahang = json['mahang'],
@@ -24,9 +24,9 @@ class Airconditional {
         power = json['power'],
         fan = json['fan'],
         mode = json['mode'],
+        nd = json['nd'],
         eco = json['eco'],
-        airflow = json['airflow'],
-        nhietdo = json['nhietdo'],
+        ai = json['ai'],
         mac = json['mac'];
 
   Map<String, dynamic> toJson() => {
@@ -36,15 +36,14 @@ class Airconditional {
     'power': power,
     'fan': fan,
     'mode': mode,
-    'mac': mac,
+    'nd': nd,
     'eco': eco,
-    'airflow': airflow,
-    'nhietdo': nhietdo,
-
+    'ai': ai,
+    'mac': mac,
   };
 
   @override
   String toString() {
-    return '$mahang - $cmd - $idprotocol - $power - $fan- $mode - $eco - $airflow - $nhietdo';
+    return '$mahang - $cmd - $idprotocol - $power - $fan- $mode - $nd - $eco - $ai ';
   }
 }

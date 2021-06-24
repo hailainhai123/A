@@ -59,7 +59,7 @@ final String patient_login_topic = "loginbenhnhan";
 final String home_status = "statusnha";
 final String room_status = "statusphong";
 final String device_status = "statusphong";
-String mac = "02:00:00:00:00:00";
+String mac = "020000000000";
 
 const one_signal_app_id = 'fe104981-6717-499d-a1a7-47bed17c8c83';
 
