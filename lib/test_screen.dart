@@ -59,16 +59,153 @@ class _TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryColor,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            buildDepartment('Chọn hãng'),
-            SizedBox(
-              height: 30,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  ClayContainer(
+                    height: 40,
+                    width: 40,
+                    borderRadius: 10,
+                    color: primaryColor,
+                    child: Padding(
+                      padding: EdgeInsets.all(4),
+                      child: Center(
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 32,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    'Room',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  ClayContainer(
+                    height: 40,
+                    width: 40,
+                    borderRadius: 10,
+                    color: primaryColor,
+                    child: Padding(
+                      padding: EdgeInsets.all(4),
+                      child: Center(
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 32,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            buildModelAir('Chọn model'),
-            // buildDepartment('Chọn loại'),
+            Container(
+              height: 120,
+              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+              child: ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.all(16),
+                    child: ClayContainer(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      borderRadius: 12,
+                      color: primaryColor,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(colors: <Color>[
+                            activeColor1,
+                            activeColor2,
+                          ]),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(6),
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.tablet,
+                              color: Colors.white,
+                              size: 34,
+                            ),
+                            title: Text(
+                              'Air Conditioner',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 22,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Container(
+                  //   margin: EdgeInsets.all(16),
+                  //   child: ClayContainer(
+                  //     height: 100,
+                  //     width: MediaQuery.of(context).size.width * 0.7,
+                  //     borderRadius: 12,
+                  //     color: primaryColor,
+                  //     child: Container(
+                  //       decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(12),
+                  //       ),
+                  //       child: Padding(
+                  //         padding: EdgeInsets.all(6),
+                  //         child: ListTile(
+                  //           leading: Icon(
+                  //             Icons.tv,
+                  //             color: Colors.white,
+                  //             size: 34,
+                  //           ),
+                  //           title: Text(
+                  //             'Smart TV',
+                  //             style: TextStyle(
+                  //               fontWeight: FontWeight.bold,
+                  //               color: Colors.white,
+                  //               fontSize: 22,
+                  //             ),
+                  //           ),
+                  //           subtitle: Text(
+                  //             'Sony Bravia ED-45REV',
+                  //             style: TextStyle(
+                  //               fontWeight: FontWeight.w500,
+                  //               color: Colors.white,
+                  //               fontSize: 15,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
+            ),
+            buildDepartment(),
+            SizedBox(
+              height: 15,
+            ),
+            buildModelAir(),
             SizedBox(
               height: 30,
             ),
@@ -107,9 +244,6 @@ class _TestScreenState extends State<TestScreen> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 20,
-            ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.center,
             //   children: [
@@ -119,20 +253,20 @@ class _TestScreenState extends State<TestScreen> {
             //   ],
             // ),
             SizedBox(
-              height: 40,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 buildButtonMode(context),
                 SizedBox(
-                  width: 50,
+                  width: 100,
                 ),
                 buildButtonFan(context),
               ],
             ),
             SizedBox(
-              height: 50,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -145,43 +279,11 @@ class _TestScreenState extends State<TestScreen> {
               ],
             ),
             SizedBox(
-              height: 50,
+              height: 20,
             ),
             buildButtonPower(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget sleek(String nhietdo) {
-    double nd = double.tryParse(nhietdo);
-    if (nd >= 200) nd = 200;
-    return Container(
-      width: 150,
-      height: 150,
-      child: SleekCircularSlider(
-        appearance: CircularSliderAppearance(
-          customColors: CustomSliderColors(
-            progressBarColors: gradientColors,
-            hideShadow: true,
-            shadowColor: Colors.transparent,
-          ),
-          customWidths: CustomSliderWidths(progressBarWidth: 10),
-          infoProperties: InfoProperties(
-              mainLabelStyle: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-              modifier: (double value) {
-                final roundedValue = nd.ceil().toInt().toString();
-                return '$roundedValue \u2103';
-              }),
-        ),
-        min: 0,
-        max: 200,
-        initialValue: nd,
       ),
     );
   }
@@ -191,7 +293,7 @@ class _TestScreenState extends State<TestScreen> {
     return ClayContainer(
       height: 200,
       width: 200,
-      color: Colors.white,
+      color: primaryColor,
       borderRadius: 200,
       child: Padding(
         padding: EdgeInsets.all(12),
@@ -242,7 +344,7 @@ class _TestScreenState extends State<TestScreen> {
               child: SleekCircularSlider(
                   min: 16,
                   max: 30,
-                  initialValue: 18,
+                  initialValue: 23,
                   appearance: CircularSliderAppearance(
                     customColors: CustomSliderColors(
                       progressBarColors: gradientColors,
@@ -251,7 +353,7 @@ class _TestScreenState extends State<TestScreen> {
                     ),
                     infoProperties: InfoProperties(
                         mainLabelStyle: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: 28,
                         ),
@@ -289,38 +391,45 @@ class _TestScreenState extends State<TestScreen> {
   }
 
   Widget buildButtonMode(BuildContext context) {
-    return RaisedButton(
-      onPressed: () {
-        if (power == 1) {
-          mode++;
-          if (mode > 2) mode = 0;
-          Airconditional airconditional = Airconditional(
-            '',
-            'set',
-            idprotocol,
-            listPower[power],
-            listFan[fan],
-            listMode[mode],
-            '${nhietDo}',
-            listEco[eco],
-            listAir[air],
-            Constants.mac,
-          );
-          pubTopic = 'TECHNO1';
-          publishMessage(pubTopic, jsonEncode(airconditional));
-          setState(() {});
-        } else {}
-      },
-      child: Text('Mode'),
+    return ClayContainer(
+      height: 40,
+      width: 80,
+      color: primaryColor,
+      borderRadius: 12,
+      child: RaisedButton(
+        color: primaryColor,
+        onPressed: () {
+          if (power == 1) {
+            mode++;
+            if (mode > 2) mode = 0;
+            Airconditional airconditional = Airconditional(
+              '',
+              'set',
+              idprotocol,
+              listPower[power],
+              listFan[fan],
+              listMode[mode],
+              '${nhietDo}',
+              listEco[eco],
+              listAir[air],
+              Constants.mac,
+            );
+            pubTopic = 'TECHNO1';
+            publishMessage(pubTopic, jsonEncode(airconditional));
+            setState(() {});
+          } else {}
+        },
+        child: Text('MODE', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+      ),
     );
   }
 
   Widget buildModeButton(IconData icon, int modeBtn) {
     var color;
     if (modeBtn == mode) {
-      color = Colors.blue;
+      color = activeColor1;
     } else {
-      color = Colors.black;
+      color = Colors.white;
     }
     return IconButton(
       onPressed: () {},
@@ -332,38 +441,44 @@ class _TestScreenState extends State<TestScreen> {
   }
 
   Widget buildButtonFan(BuildContext context) {
-    return RaisedButton(
-      onPressed: () {
-        if (power == 1) {
-          fan++;
-          if (fan > 3) fan = 0;
-          Airconditional airconditional = Airconditional(
-            '',
-            'set',
-            idprotocol,
-            listPower[power],
-            listFan[fan],
-            listMode[mode],
-            '${nhietDo}',
-            listEco[eco],
-            listAir[air],
-            Constants.mac,
-          );
-          pubTopic = 'TECHNO1';
-          publishMessage(pubTopic, jsonEncode(airconditional));
-          setState(() {});
-        }
-      },
-      child: Text('Fan'),
+    return ClayContainer(
+      height: 40,
+      width: 80,
+      color: primaryColor,
+      child: RaisedButton(
+        color: primaryColor,
+        onPressed: () {
+          if (power == 1) {
+            fan++;
+            if (fan > 3) fan = 0;
+            Airconditional airconditional = Airconditional(
+              '',
+              'set',
+              idprotocol,
+              listPower[power],
+              listFan[fan],
+              listMode[mode],
+              '${nhietDo}',
+              listEco[eco],
+              listAir[air],
+              Constants.mac,
+            );
+            pubTopic = 'TECHNO1';
+            publishMessage(pubTopic, jsonEncode(airconditional));
+            setState(() {});
+          }
+        },
+        child: Text('FAN', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+      ),
     );
   }
 
   Widget buildFanButton(String text, int fanBtn) {
     var color;
     if (fanBtn == fan) {
-      color = Colors.blue;
+      color = activeColor1;
     } else {
-      color = Colors.black;
+      color = Colors.white;
     }
     return TextButton(
       onPressed: () {},
@@ -375,29 +490,35 @@ class _TestScreenState extends State<TestScreen> {
   }
 
   Widget buildButtonEco(BuildContext context) {
-    return RaisedButton(
-      onPressed: () {
-        if (power == 1) {
-          eco++;
-          if (eco > 2) eco = 0;
-          Airconditional airconditional = Airconditional(
-            '',
-            'set',
-            idprotocol,
-            listPower[power],
-            listFan[fan],
-            listMode[mode],
-            '${nhietDo}',
-            listEco[eco],
-            listAir[air],
-            Constants.mac,
-          );
-          pubTopic = 'TECHNO1';
-          publishMessage(pubTopic, jsonEncode(airconditional));
-          setState(() {});
-        }
-      },
-      child: Text('Eco'),
+    return ClayContainer(
+      height: 40,
+      width: 80,
+      color: primaryColor,
+      child: RaisedButton(
+        color: primaryColor,
+        onPressed: () {
+          if (power == 1) {
+            eco++;
+            if (eco > 2) eco = 0;
+            Airconditional airconditional = Airconditional(
+              '',
+              'set',
+              idprotocol,
+              listPower[power],
+              listFan[fan],
+              listMode[mode],
+              '${nhietDo}',
+              listEco[eco],
+              listAir[air],
+              Constants.mac,
+            );
+            pubTopic = 'TECHNO1';
+            publishMessage(pubTopic, jsonEncode(airconditional));
+            setState(() {});
+          }
+        },
+        child: Text('ECO',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+      ),
     );
   }
 
@@ -418,33 +539,39 @@ class _TestScreenState extends State<TestScreen> {
   }
 
   Widget buildButtonAirflow(BuildContext context) {
-    return RaisedButton(
-      onPressed: () {
-        if (power == 1) {
-          air++;
-          if (air > 5) air = 0;
-          Airconditional airconditional = Airconditional(
-            '',
-            'set',
-            idprotocol,
-            listPower[power],
-            listFan[fan],
-            listMode[mode],
-            '${nhietDo}',
-            listEco[eco],
-            listAir[air],
-            Constants.mac,
-          );
-          pubTopic = 'TECHNO1';
-          publishMessage(pubTopic, jsonEncode(airconditional));
-          setState(() {});
-        }
-      },
-      child: Text('Air'),
+    return ClayContainer(
+      height: 40,
+      width: 80,
+      color: primaryColor,
+      child: RaisedButton(
+        color: primaryColor,
+        onPressed: () {
+          if (power == 1) {
+            air++;
+            if (air > 5) air = 0;
+            Airconditional airconditional = Airconditional(
+              '',
+              'set',
+              idprotocol,
+              listPower[power],
+              listFan[fan],
+              listMode[mode],
+              '${nhietDo}',
+              listEco[eco],
+              listAir[air],
+              Constants.mac,
+            );
+            pubTopic = 'TECHNO1';
+            publishMessage(pubTopic, jsonEncode(airconditional));
+            setState(() {});
+          }
+        },
+        child: Text('AIR',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+      ),
     );
   }
 
-  Widget buildDepartment(String text) {
+  Widget buildDepartment() {
     return Container(
       height: 44,
       width: double.infinity,
@@ -453,7 +580,7 @@ class _TestScreenState extends State<TestScreen> {
           5,
         ),
         border: Border.all(
-          color: Colors.green,
+          color: Colors.white,
         ),
       ),
       margin: const EdgeInsets.symmetric(
@@ -467,6 +594,7 @@ class _TestScreenState extends State<TestScreen> {
           Expanded(
             child: Text(
               '',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
@@ -481,7 +609,7 @@ class _TestScreenState extends State<TestScreen> {
     return Container(
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          hint: Text('Chọn hãng'),
+          hint: Text('Chọn hãng', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
           value: currentSelectedValue,
           isDense: true,
           onChanged: (newValue) {
@@ -500,7 +628,7 @@ class _TestScreenState extends State<TestScreen> {
           items: dropDownItems.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value),
+              child: Text(value,style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
             );
           }).toList(),
         ),
@@ -508,7 +636,7 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  Widget buildModelAir(String text) {
+  Widget buildModelAir() {
     return Container(
       height: 44,
       width: double.infinity,
@@ -531,6 +659,7 @@ class _TestScreenState extends State<TestScreen> {
           Expanded(
             child: Text(
               '',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               maxLines: 2,
             ),
           ),
@@ -546,7 +675,7 @@ class _TestScreenState extends State<TestScreen> {
     return Container(
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          hint: Text('Chọn model'),
+          hint: Text('Chọn model',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
           value: model,
           isDense: true,
           onChanged: (newValue) {
@@ -566,6 +695,7 @@ class _TestScreenState extends State<TestScreen> {
               value: value,
               child: Text(
                 value,
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                 maxLines: 2,
                 overflow: TextOverflow.clip,
               ),
@@ -680,35 +810,41 @@ class _TestScreenState extends State<TestScreen> {
 
   Widget buildButtonPower() {
     if (power == 0) {
-      color = Colors.white;
+      color = primaryColor;
     }
 
     if (power == 1) {
       color = Colors.red;
     }
 
-    return RaisedButton(
-      onPressed: () {
-        power++;
-        if (power > 1) power = 0;
-        Airconditional airconditional = Airconditional(
-          '',
-          'set',
-          idprotocol,
-          listPower[power],
-          listFan[fan],
-          listMode[mode],
-          '${nhietDo}',
-          listEco[eco],
-          listAir[air],
-          Constants.mac,
-        );
-        pubTopic = 'TECHNO1';
-        publishMessage(pubTopic, jsonEncode(airconditional));
-        setState(() {});
-      },
-      child: Text('Power'),
-      color: color,
+    return ClayContainer(
+      height: 60,
+      width: 120,
+      color: primaryColor,
+      child: RaisedButton(
+        // color: primaryColor,
+        onPressed: () {
+          power++;
+          if (power > 1) power = 0;
+          Airconditional airconditional = Airconditional(
+            '',
+            'set',
+            idprotocol,
+            listPower[power],
+            listFan[fan],
+            listMode[mode],
+            '${nhietDo}',
+            listEco[eco],
+            listAir[air],
+            Constants.mac,
+          );
+          pubTopic = 'TECHNO1';
+          publishMessage(pubTopic, jsonEncode(airconditional));
+          setState(() {});
+        },
+        child: Text('POWER',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+        color: color,
+      ),
     );
   }
 
