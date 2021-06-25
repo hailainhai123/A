@@ -589,12 +589,12 @@ class _TestScreenState extends State<TestScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Text(
               '',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
@@ -628,7 +628,7 @@ class _TestScreenState extends State<TestScreen> {
           items: dropDownItems.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value,style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+              child: Text(value,style: TextStyle(color: activeColor1, fontWeight: FontWeight.bold),),
             );
           }).toList(),
         ),
@@ -654,18 +654,15 @@ class _TestScreenState extends State<TestScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Text(
               '',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              maxLines: 2,
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ),
           ),
-          Expanded(
-            child: dropdownModelAir(),
-          ),
+          Expanded(child: dropdownModelAir()),
         ],
       ),
     );
@@ -688,14 +685,18 @@ class _TestScreenState extends State<TestScreen> {
               });
               pubProtocol();
             });
+            // listModel.clear();
+            // dropDownItemsModel.clear();
             print('_TestScreenState.dropdownDepartment $model');
+            print('_TestScreenState.dropdownModelAir listmodel $listModel');
+            print('_TestScreenState.dropdownModelAir dropDownItemsModel $dropDownItemsModel');
           },
           items: dropDownItemsModel.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(
                 value,
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: TextStyle(color: activeColor1, fontWeight: FontWeight.bold),
                 maxLines: 2,
                 overflow: TextOverflow.clip,
               ),
@@ -784,26 +785,31 @@ class _TestScreenState extends State<TestScreen> {
         final airConditionerResponse = airConditionerResponseFromJson(message);
         tbs = airConditionerResponse.id;
         setState(() {});
+        // listModel.clear();
+        // dropDownItemsModel.clear();
+        dropDownItems.clear();
+        tbs.forEach((element) {
+          dropDownItems.add(element.hang);
+        });
         break;
       case Constants.GET_MODEL:
+        // listModel.clear();
         final modelAirconditionalResponse =
             modelAirconditionalResponseFromJson(message);
         listModel = modelAirconditionalResponse.id;
         setState(() {});
         print('_TestScreenState.dropdownModelAir listmodel $listModel');
+        dropDownItemsModel.clear();
+        listModel.forEach((element) {
+          dropDownItemsModel.add(element.model);
+        });
+
+        model = dropDownItemsModel[0] as String;
+
         break;
     }
     pubTopic = '';
 
-    dropDownItems.clear();
-    tbs.forEach((element) {
-      dropDownItems.add(element.hang);
-    });
-
-    dropDownItemsModel.clear();
-    listModel.forEach((element) {
-      dropDownItemsModel.add(element.model);
-    });
     print('_TestScreenState.handleDevice $dropDownItems');
     print('_TestScreenState.handleDeviceModel $dropDownItemsModel');
   }
