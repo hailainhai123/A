@@ -25,6 +25,19 @@ const Color PRICE_COLOR_ON_FORE = Color(0xfffbd46d);
 const Color PRIMARY_TEXT_COLOR = PRIMARY_COLOR;
 const Color FORE_TEXT_COLOR = BACKGROUND_COLOR;
 
+const String PREF_MODEL = "PREF_MODEL";
+const String PREF_HANG = "PREF_HANG";
+const UPDATE_USER = 'updateuser';
+const UPDATE_PARENT = 'updateph';
+const DELETE_PARENT = 'deleteph';
+const DELETE_USER = 'deleteuser';
+const CHANGE_PASSWORD_USER = 'updatepass';
+const CHANGE_PASSWORD_PARENT = 'updatepassph';
+const GET_INFO_USER = 'getinfouser';
+const GET_INFO_PARENT = 'getinfoph';
+
+const String TECHNO1 = "TECHNO1";
+
 //////FOOD
 //const Color PRIMARY_COLOR = Color(0xff000000);
 //const Color BACKGROUND_COLOR = Color(0xffF7EBE8);

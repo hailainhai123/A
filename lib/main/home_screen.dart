@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // DetailScreen(),
           // AddScreen(),
           // UserProfilePage(
-          //   quyen: '1',
+          //switchValue: false,
           // ),
         ];
         break;
@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
           DetailPage(),
           AddPatientScreen(),
           UserProfilePage(
-            quyen: '1',
+            switchValue: false,
           ),
         ];
         break;
